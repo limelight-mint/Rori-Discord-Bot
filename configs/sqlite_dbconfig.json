@@ -1,0 +1,4 @@
+{
+  "DbPath": "usersdata.db",
+  "Mode": "ReadWriteCreate"
+}

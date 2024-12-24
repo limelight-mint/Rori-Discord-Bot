@@ -1,0 +1,5 @@
+{
+  "Token": "your_token_from_discord_developer_portal_goes_here",
+  "TokenType": 1,
+  "Prefixes": [ "!" ]
+}

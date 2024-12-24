@@ -1,0 +1,31 @@
+{
+  "LimesPerMessage": 1,
+  "MaxLimes": 999999999,
+
+  "LevelToMultiplierTable":
+  {
+    "1":1,
+    "5":1.15,
+    "10":1.25,
+    "20":1.5,
+    "30":1.75,
+    "40":2,
+    "50":2.5,
+    "60":3,
+    "70":3.5,
+    "80":4,
+    "85":4.5,
+    "90":5,
+    "95":6,
+    "100":7
+  },
+
+  "Decorations":
+  {
+    "1":0,
+    "2":0,
+    "3":0
+  },
+
+  "DefaultProfileImageUrl": "https://raw.githubusercontent.com/limelight-mint/Rori-Discord-Bot/main/content/default-profile-banner.png"
+}

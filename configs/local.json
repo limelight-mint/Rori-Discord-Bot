@@ -1,0 +1,70 @@
+{
+  "english": [
+    {
+      "key": "dummy_key",
+      "text": "dummy text about this key"
+    },
+    {
+      "key": "dummy_key2",
+      "text": "dummy text about this key"
+    }
+  ],
+  "french": [
+    {
+      "key": "dummy_key",
+      "text": "dummy text about this key"
+    },
+    {
+      "key": "dummy_key2",
+      "text": "dummy text about this key"
+    }
+  ],
+  "ukrainian": [
+    {
+      "key": "dummy_key",
+      "text": "dummy text about this key"
+    }
+  ],
+  "german": [
+    {
+      "key": "dummy_key",
+      "text": "dummy text about this key"
+    }
+  ],
+  "japanese": [
+    {
+      "key": "dummy_key",
+      "text": "dummy text about this key"
+    },
+    {
+      "key": "dummy_key2",
+      "text": "dummy text about this key"
+    }
+  ],
+  "portuguese": [
+    {
+      "key": "dummy_key",
+      "text": "dummy text about this key"
+    },
+    {
+      "key": "dummy_key2",
+      "text": "dummy text about this key"
+    }
+  ],
+  "russian": [
+    {
+      "key": "dummy_key",
+      "text": "dummy text about this key"
+    },
+    {
+      "key": "dummy_key2",
+      "text": "dummy text about this key"
+    }
+  ],
+  "spanish": [
+    {
+      "key": "dummy_key",
+      "text": "dummy text about this key"
+    }
+  ]
+}
