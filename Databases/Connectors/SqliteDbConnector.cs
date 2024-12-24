@@ -5,7 +5,7 @@ using LLM.Rori.Discord.Base.Interfaces;
 namespace LLM.Rori.Discord.Databases.Connectors
 {
 
-    public class SqliteDbConnector : IDatabaseConnector
+    internal class SqliteDbConnector : IDatabaseConnector
     {
         protected string debugInfo = "[SqliteDbConnector]";
 

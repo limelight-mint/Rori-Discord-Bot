@@ -45,13 +45,11 @@ namespace LLM.Rori.Discord
             var profileService = new BotProfileHandler();
 
             //Implemented Example of Database Swap:
-            //var dbConfig = await GetDatabaseConfig<MySqlDatabaseConfig>("mysql_dbconfig.json");
+            //var dbInfo = await GetDatabaseConfig<MySqlDatabaseConfig>("mysql_dbconfig.json");
             //IDatabaseHandler<UserData, UserData> dataHandler = new MySqlDataHandler(dbInfo.DbConfig, dbInfo.Config);
 
             var dbInfo = await GetDatabaseConfig<SqliteDatabaseConfig>("sqlite_dbconfig.json");
-            SqliteDataHandler dataHandler = new SqliteDataHandler(dbInfo.DbConfig, dbInfo.Config);
-
-            await dataHandler.CreateTableIfNeeded(new SqliteDbConnector(dbInfo.DbConfig), false, true);
+            IDatabaseHandler<UserData, UserData> dataHandler = new SqliteDataHandler(dbInfo.DbConfig, dbInfo.Config);
 
             //Init discord client itself and setup activity
             var discordInfo = await InitializeDiscord(profileService);

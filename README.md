@@ -49,12 +49,18 @@ Functionality divided like this:
 
 Once its done simply change the current used abstractions in `./Program.cs` like that:
 ```
-IDatabaseHandler dataHandler = new MySqlDataHandler(dbConfig);
+var dbInfo = await GetDatabaseConfig<SqliteDatabaseConfig>("sqlite_dbconfig.json");
+IDatabaseHandler<UserData, UserData> dataHandler = new SqliteDataHandler(dbInfo.DbConfig, dbInfo.Config);
 ```
 > Change to:
 ```
-IDatabaseHandler dataHandler = new XXXXXDataHandler(dbConfig);
+var dbInfo = await GetDatabaseConfig<XXXXXXDatabaseConfig>("xxxxx_dbconfig.json");
+IDatabaseHandler<UserData, UserData> dataHandler = new XXXXXXDataHandler(dbInfo.DbConfig, dbInfo.Config);
 ```
+
+
+> [!TIP]
+> You can change `IDatabaseHandler<UserData, UserData>` to `IDatabaseHandler<UserData, UserCredentials>` for example, if you dont wanna push entire class. Or even move generic from `Class`-based to `Method`-based if you want more flexibility.
 
 
 ***

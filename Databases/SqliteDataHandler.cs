@@ -21,7 +21,7 @@ namespace LLM.Rori.Discord.Databases
         {
             this.cachedDbConfig = cachedDbConfig;
             Config = mainConfig;
-            //CreateTableIfNeeded(new SqliteDbConnector(cachedDbConfig), false, true).ConfigureAwait(false);
+            CreateTableIfNeeded(new SqliteDbConnector(cachedDbConfig), false, true).ConfigureAwait(false);
         }
 
         public async Task SendData(UserData data, string customQuery = "")
@@ -87,7 +87,7 @@ namespace LLM.Rori.Discord.Databases
             await updateCommand.ExecuteScalarAsync();
         }
 
-        public async Task CreateTableIfNeeded(SqliteDbConnector connector, bool isConnectedAlready = true, bool isDisposeAfter = false)
+        private async Task CreateTableIfNeeded(SqliteDbConnector connector, bool isConnectedAlready = true, bool isDisposeAfter = false)
         {
             if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), cachedDbConfig.DbPath))) return;
 
