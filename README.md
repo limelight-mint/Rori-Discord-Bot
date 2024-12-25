@@ -34,7 +34,7 @@ Bot functions:
 <img src="https://github.com/user-attachments/assets/ada803d4-039e-455e-8c3c-200cff920d17" width="250px">
 
 
-> Open configs folder, startup_config.json (`Rori-Discord-Bot/bin/Debug/net6/configs/` if you run from Visual Studio) and edit token from [your dev portal](https://discord.com/developers/applications) (create a bot and copy token)
+> Open configs folder, startup_config.json (please move `configs` folder to `bin/Debug/netX/` folder if you run from Visual Studio, like so: `Rori-Discord-Bot/bin/Debug/net6/configs/`) and edit token from [your dev portal](https://discord.com/developers/applications) (create a bot and copy token)
 5. Open project in Visual Studio (if you havent done so already) or just double click `Rori-discord.sln`, Visual Studio will automatically start things
 6. When its loaded press F5 to start debugging or a play button up top
 7. Have fun playing around changing letters (all slash cmds is inside `./Commands/Slash` and startup point is in `./Program.cs`)
