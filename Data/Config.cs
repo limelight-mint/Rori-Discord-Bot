@@ -14,5 +14,6 @@
 
         //URLs
         public string DefaultProfileImageUrl = "https://raw.githubusercontent.com/limelight-mint/Rori-Discord-Bot/main/content/default-profile-banner.png";
+        public string DefaultAboutImageUrl = "https://raw.githubusercontent.com/limelight-mint/Rori-Discord-Bot/main/content/default-about-banner.png";
     }
 }
