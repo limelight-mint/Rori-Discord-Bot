@@ -11,7 +11,7 @@ namespace LLM.Rori.Discord.Commands.Slash
         [SlashCommand("about", "Shows info about the app")]
         public async Task ShowAbout(InteractionContext context)
         {
-            await context.CreateResponseAsync(HelpAction.GetEmbed(Config.DefaultProfileImageUrl));
+            await context.CreateResponseAsync(HelpAction.GetEmbed(Config.DefaultAboutImageUrl, Config.Version));
         }
     }
 }

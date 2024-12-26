@@ -27,5 +27,6 @@
     "3":0
   },
 
-  "DefaultProfileImageUrl": "https://raw.githubusercontent.com/limelight-mint/Rori-Discord-Bot/main/content/default-profile-banner.png"
+  "DefaultProfileImageUrl": "https://raw.githubusercontent.com/limelight-mint/Rori-Discord-Bot/main/content/default-profile-banner.png",
+  "DefaultAboutImageUrl": "https://raw.githubusercontent.com/limelight-mint/Rori-Discord-Bot/main/content/default-about-banner.png"
 }
