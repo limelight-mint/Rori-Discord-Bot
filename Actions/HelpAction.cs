@@ -10,13 +10,13 @@ namespace LLM.Rori.Discord.Actions
 
         public static Version Version = new Version(0, 0, 1);
 
-        public static string GetMessage(Version currentVersion)
+        public static string GetMessage(Version currentVersion = null)
         {
             return $"**Discord bot** for verification, events, activity tracking in Minty Universe and related products. Just start typing slash `/` and you will see all the commands." +
-                    $"\n\n> 🍋 MintyBar: {Site}\n\n> 💾 Open-Source: {Github}\n\n> ☕ *Current Release: v{Version.Major}.{Version.Minor}.{Version.Build}*";
+                    $"\n\n> 🍋 MintyBar: {Site}\n\n> 💾 Open-Source: {Github}\n\n{TryParseVersion(currentVersion)}";
         }
 
-        public static DiscordEmbedBuilder GetEmbed(string bannerUrl, Version currentVersion)
+        public static DiscordEmbedBuilder GetEmbed(string bannerUrl, Version currentVersion = null)
         {
             return new DiscordEmbedBuilder()
             {
@@ -26,9 +26,17 @@ namespace LLM.Rori.Discord.Actions
             };
         }
 
-        public static DiscordInteractionResponseBuilder GetInteractionResponse(string bannerUrl, Version currentVersion)
+        public static DiscordInteractionResponseBuilder GetInteractionResponse(string bannerUrl, Version currentVersion = null)
         {
             return new DiscordInteractionResponseBuilder().AddEmbed(GetEmbed(bannerUrl, currentVersion));
+        }
+
+        public static string GetVersion() => $"> ☕ *Current Release: v{Version.Major}.{Version.Minor}.{Version.Build}*";
+
+        public static string TryParseVersion(Version version)
+        {
+            if (version != null) Version = version;
+            return GetVersion();
         }
     }
 }
