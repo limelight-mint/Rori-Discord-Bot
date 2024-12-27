@@ -148,7 +148,7 @@ namespace LLM.Rori.Discord.Extension
 
         }
 
-        public static string GetText(this UserData user, string key) => Localization.GetText(Localization.LanguageFromCode(user.Locale), key);
+        public static string GetText(this MintyBarData user, string key) => Localization.GetText(Localization.LanguageFromCode(user.Locale), key);
 
     }
 }

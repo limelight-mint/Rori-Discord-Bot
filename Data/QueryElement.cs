@@ -10,6 +10,9 @@ namespace LLM.Rori.Discord.Data
         Stats,
         Events,
         Username,
-        Inventory
+        Inventory,
+        
+        DiscordData,
+        MintyBarData
     }
 }

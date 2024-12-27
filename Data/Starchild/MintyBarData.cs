@@ -3,7 +3,7 @@
 namespace LLM.Rori.Discord.Data.Starchild
 {
     [Serializable]
-    public class UserData
+    public class MintyBarData
     {
         public string Id { get; set; }
         public string Username { get; set; }

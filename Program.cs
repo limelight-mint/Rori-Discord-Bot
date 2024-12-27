@@ -4,6 +4,7 @@ using DSharpPlus.SlashCommands;
 using Newtonsoft.Json;
 using Microsoft.Extensions.DependencyInjection;
 using LLM.Rori.Discord.Data;
+using LLM.Rori.Discord.Data.Bot;
 using LLM.Rori.Discord.Services;
 using LLM.Rori.Discord.Databases;
 using LLM.Rori.Discord.Extension;
@@ -46,10 +47,10 @@ namespace LLM.Rori.Discord
 
             //Implemented Example of Database Swap:
             //var dbInfo = await GetDatabaseConfig<MySqlDatabaseConfig>("mysql_dbconfig.json");
-            //IDatabaseHandler<UserData, UserData> dataHandler = new MySqlDataHandler(dbInfo.DbConfig, dbInfo.Config);
+            //IDatabaseHandler<MintyBarData, MintyBarData> dataHandler = new MySqlDataHandler(dbInfo.DbConfig, dbInfo.Config);
 
             var dbInfo = await GetDatabaseConfig<SqliteDatabaseConfig>("sqlite_dbconfig.json");
-            IDatabaseHandler<UserData, UserData> dataHandler = new SqliteDataHandler(dbInfo.DbConfig, dbInfo.Config);
+            IDatabaseHandler<User, User> dataHandler = new SqliteDataHandler(dbInfo.DbConfig, dbInfo.Config);
 
             //Init discord client itself and setup activity
             var discordInfo = await InitializeDiscord(profileService);
@@ -84,7 +85,7 @@ namespace LLM.Rori.Discord
 
 
         private static ServiceProvider BindServices(
-            BotProfileHandler profileService, IDatabaseHandler<UserData, UserData> dataHandler,
+            BotProfileHandler profileService, IDatabaseHandler<User, User> dataHandler,
             Config mainConfig)
         {
             ServiceCollection services = new ServiceCollection();
@@ -105,6 +106,7 @@ namespace LLM.Rori.Discord
 
             //Register one-by-one is preffered instead of .RegisterCommands(typeof(Program).Assembly);
             slash.RegisterCommands<AboutCommand>();
+            slash.RegisterCommands<ConnectCommand>();
         }
     }
 }

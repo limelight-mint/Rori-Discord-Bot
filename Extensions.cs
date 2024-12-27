@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using LLM.Rori.Discord.Data;
 using LLM.Rori.Discord.Data.Starchild;
+using LLM.Rori.Discord.Data.Bot;
 
 namespace LLM.Rori.Discord.Extension
 {
@@ -30,7 +31,7 @@ namespace LLM.Rori.Discord.Extension
 
         }
 
-        public static string GetCorrespondingQuery(this QueryElement element, UserData user)
+        public static string GetCorrespondingQuery(this QueryElement element, MintyBarData user)
         {
             switch (element)
             {
@@ -43,7 +44,25 @@ namespace LLM.Rori.Discord.Extension
             }
         }
 
-        public static bool IsValid(this UserData user)
+        public static string GetCorrespondingQuery(this QueryElement element, User user)
+        {
+            switch (element)
+            {
+                case QueryElement.DiscordData: return $"`discord_data`='{JsonConvert.SerializeObject(user.DiscordData)}'";
+                case QueryElement.MintyBarData: return $"`minty_bar_data`='{JsonConvert.SerializeObject(user.MintyBarData)}'";
+                default:
+                    return $"`userid='{user.Id}',`discord_data`='{JsonConvert.SerializeObject(user.DiscordData)}',`minty_bar_data`='{JsonConvert.SerializeObject(user.MintyBarData)}'";
+            }
+        }
+
+        public static bool IsValid(this MintyBarData user)
+        {
+            if (user == null) return false;
+            if (string.IsNullOrEmpty(user.Id)) return false;
+            return true;
+        }
+
+        public static bool IsValid(this User user)
         {
             if (user == null) return false;
             if (string.IsNullOrEmpty(user.Id)) return false;

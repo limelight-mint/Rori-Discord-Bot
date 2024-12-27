@@ -1,6 +1,7 @@
 ﻿using DSharpPlus.Entities;
 using Microsoft.Data.Sqlite;
 using LLM.Rori.Discord.Data;
+using LLM.Rori.Discord.Data.Bot;
 using LLM.Rori.Discord.Builders;
 using LLM.Rori.Discord.Extension;
 using LLM.Rori.Discord.Data.Database;
@@ -11,7 +12,7 @@ using LLM.Rori.Discord.Databases.QueryHandlers;
 
 namespace LLM.Rori.Discord.Databases
 {
-    public class SqliteDataHandler : IRoriService, IDatabaseHandler<UserData, UserData>
+    public class SqliteDataHandler : IRoriService, IDatabaseHandler<User, User>
     {
         private SqliteDatabaseConfig cachedDbConfig = null;
 
@@ -24,7 +25,7 @@ namespace LLM.Rori.Discord.Databases
             CreateTableIfNeeded(new SqliteDbConnector(cachedDbConfig), false, true).ConfigureAwait(false);
         }
 
-        public async Task SendData(UserData data, string customQuery = "")
+        public async Task SendData(User data, string customQuery = "")
         {
             var connector = new SqliteDbConnector(cachedDbConfig); //open connection
             await connector.ConnectAsync();
@@ -34,20 +35,20 @@ namespace LLM.Rori.Discord.Databases
 
             string query = string.Empty;
             if (!user.IsValid()) query = SqliteQueryHandler.GetUserInsertQuery(user);
-            else query = customQuery != string.Empty ? customQuery : new SqlUserUpdateQueryBuilder(user, QueryElement.All).Build();
+            else query = customQuery != string.Empty ? customQuery : new SqliteUserUpdateQueryBuilder(user, QueryElement.All).Build();
 
-            Console.WriteLine($"[LOAD] Sending user data to a db: {user.Username}");
+            Console.WriteLine($"[LOAD] Sending user data to a db: {user.DiscordData.Username}");
             var updateCommand = new SqliteCommand(query, connector.Connection);
             await updateCommand.ExecuteScalarAsync();
 
             await updateCommand.DisposeAsync();
 
-            Console.WriteLine($"[SUCCESS] Data updated for user: {user.Username}");
+            Console.WriteLine($"[SUCCESS] Data updated for user: {user.DiscordData.Username}");
             //close connection
             await connector.DisconnectAndDisposeAsync();
         }
 
-        public async Task<UserData> GetData(DiscordUser discordUser, string customQuery = "")
+        public async Task<User> GetData(DiscordUser discordUser, string customQuery = "")
         {
             var connector = new SqliteDbConnector(cachedDbConfig); //open connection
             await connector.ConnectAsync();
@@ -58,8 +59,10 @@ namespace LLM.Rori.Discord.Databases
 
             if (!user.IsValid())
             {
-                user = new UserData();
-                user.Username = discordUser.Username;
+                user = new User();
+                user.DiscordData = new DiscordData();
+                user.DiscordData.Id = discordUser.Id.ToString();
+                user.DiscordData.Username = discordUser.Username;
                 user.Id = discordUser.Id.ToString();
 
                 await SendDataCustomQuery(SqliteQueryHandler.GetUserInsertQuery(user), connector);
@@ -70,7 +73,7 @@ namespace LLM.Rori.Discord.Databases
             return user;
         }
 
-        public async Task<List<UserData>> GetAllUsers()
+        public async Task<List<User>> GetAllUsers()
         {
             var connector = new SqliteDbConnector(cachedDbConfig); //open connection
             await connector.ConnectAsync();
@@ -95,7 +98,7 @@ namespace LLM.Rori.Discord.Databases
             //File.Create(Path.Combine(Directory.GetCurrentDirectory(), cachedDbConfig.DbPath)); //sqlite can handle it
             if(!isConnectedAlready) await connector.ConnectAsync();
 
-            var createCommand = new SqliteCommand("CREATE TABLE Users(Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, DiscordUid TEXT NOT NULL, DiscordData TEXT NOT NULL, MintyBarUid TEXT, MintyBarData TEXT, IsBlocked INTEGER NOT NULL)", connector.Connection);
+            var createCommand = new SqliteCommand("CREATE TABLE Users(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, id TEXT NOT NULL, discord_data TEXT NOT NULL, minty_bar_data TEXT)", connector.Connection);
             await createCommand.ExecuteScalarAsync();
 
             Console.WriteLine($"{cachedDbConfig.DbPath} table created.");

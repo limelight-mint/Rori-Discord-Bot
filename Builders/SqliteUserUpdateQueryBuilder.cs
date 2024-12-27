@@ -3,21 +3,21 @@ using LLM.Rori.Discord.Data;
 using LLM.Rori.Discord.Extension;
 using LLM.Rori.Discord.Data.Starchild;
 using LLM.Rori.Discord.Base.Interfaces;
+using LLM.Rori.Discord.Data.Bot;
 
 namespace LLM.Rori.Discord.Builders
 {
     /// <summary>
     /// Class used to build update queries to update only needed elements instead of all tables/rows
     /// </summary>
-    internal class SqlUserUpdateQueryBuilder : IQueryBuilder
-
+    internal class SqliteUserUpdateQueryBuilder : IQueryBuilder
     {
         public string QueryString { get; private set; }
         public QueryElement[] ElementsUsed { get; private set; }
 
         public string UserIdUsed { get; protected set; }
 
-        public SqlUserUpdateQueryBuilder(MintyBarData user, params QueryElement[] elements)
+        public SqliteUserUpdateQueryBuilder(User user, params QueryElement[] elements)
         {
             ElementsUsed = elements;
             UserIdUsed = user.Id;

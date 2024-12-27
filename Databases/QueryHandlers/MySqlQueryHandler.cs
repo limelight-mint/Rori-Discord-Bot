@@ -15,7 +15,7 @@ namespace LLM.Rori.Discord.Databases.QueryHandlers
         /// Gets full user data from entire table
         /// </summary>
         /// <returns>user with filled data</returns>
-        public static UserData GetUserFromQuery(string userId, MySqlDbConnector connector)
+        public static MintyBarData GetUserFromQuery(string userId, MySqlDbConnector connector)
         {
             Console.WriteLine($"[LOAD] Trying to get user from Query | {userId}");
             string query = GetSelectUserQuery(userId);
@@ -26,9 +26,9 @@ namespace LLM.Rori.Discord.Databases.QueryHandlers
             return user;
         }
 
-        public static UserData ReadUserFromQuery(MySqlCommand command)
+        public static MintyBarData ReadUserFromQuery(MySqlCommand command)
         {
-            var user = new UserData();
+            var user = new MintyBarData();
             var reader = command.ExecuteReader();
 
             while (reader.Read())
@@ -45,15 +45,15 @@ namespace LLM.Rori.Discord.Databases.QueryHandlers
             return user;
         }
 
-        public static List<UserData> ReadUsersFromQuery(MySqlCommand command)
+        public static List<MintyBarData> ReadUsersFromQuery(MySqlCommand command)
         {
-            var users = new List<UserData>();
+            var users = new List<MintyBarData>();
 
             var reader = command.ExecuteReader();
 
             while (reader.Read())
             {
-                var user = new UserData();
+                var user = new MintyBarData();
 
                 user.Id = reader.GetString("userid");
                 user.Username = reader.GetString("username");
@@ -75,7 +75,7 @@ namespace LLM.Rori.Discord.Databases.QueryHandlers
         public static string GetSelectAllUsersQuery() => "SELECT * FROM users";
 
         /// <returns>Query string for insertion for a completely NEW user (insert all rows)</returns>
-        public static string GetUserInsertQuery(UserData user)
+        public static string GetUserInsertQuery(MintyBarData user)
         {
             string query = $"INSERT INTO `users`(`userid`, `username`, `wallet`, `stats`, `inventory`) " +
                 $"VALUES ('{user.Id}','{user.Username}','{JsonConvert.SerializeObject(user.Wallet)}'," +
@@ -84,9 +84,9 @@ namespace LLM.Rori.Discord.Databases.QueryHandlers
             return query;
         }
 
-        public static List<UserData> GetSelectAllUsersQuery(MySqlDbConnector connector)
+        public static List<MintyBarData> GetSelectAllUsersQuery(MySqlDbConnector connector)
         {
-            var users = new List<UserData>();
+            var users = new List<MintyBarData>();
             string query = GetSelectAllUsersQuery();
             var selectCommand = new MySqlCommand(query, connector.Connection);
 

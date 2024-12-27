@@ -11,7 +11,7 @@ using LLM.Rori.Discord.Databases.QueryHandlers;
 
 namespace LLM.Rori.Discord.Databases
 {
-    public class MySqlDataHandler : IRoriService, IDatabaseHandler<UserData, UserData>
+    public class MySqlDataHandler : IRoriService, IDatabaseHandler<MintyBarData, MintyBarData>
     {
         private MySqlDatabaseConfig cachedDbConfig = null;
 
@@ -23,7 +23,7 @@ namespace LLM.Rori.Discord.Databases
             Config = mainConfig;
         }
 
-        public async Task SendData(UserData data, string customQuery = "")
+        public async Task SendData(MintyBarData data, string customQuery = "")
         {
             var connector = new MySqlDbConnector(cachedDbConfig); //open connection
             await connector.ConnectAsync();
@@ -46,7 +46,7 @@ namespace LLM.Rori.Discord.Databases
             await connector.DisconnectAndDisposeAsync();
         }
 
-        public async Task<UserData> GetData(DiscordUser discordUser, string customQuery = "")
+        public async Task<MintyBarData> GetData(DiscordUser discordUser, string customQuery = "")
         {
             var connector = new MySqlDbConnector(cachedDbConfig); //open connection
             await connector.ConnectAsync();
@@ -57,7 +57,7 @@ namespace LLM.Rori.Discord.Databases
 
             if (!user.IsValid())
             {
-                user = new UserData();
+                user = new MintyBarData();
                 user.Username = discordUser.Username;
                 user.Id = discordUser.Id.ToString();
 
@@ -69,7 +69,7 @@ namespace LLM.Rori.Discord.Databases
             return user;
         }
 
-        public async Task<List<UserData>> GetAllUsers()
+        public async Task<List<MintyBarData>> GetAllUsers()
         {
             var connector = new MySqlDbConnector(cachedDbConfig); //open connection
             await connector.ConnectAsync();
