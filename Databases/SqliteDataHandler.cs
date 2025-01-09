@@ -37,7 +37,7 @@ namespace LLM.Rori.Discord.Databases
             if (!user.IsValid()) query = SqliteQueryHandler.GetUserInsertQuery(user);
             else query = customQuery != string.Empty ? customQuery : new SqliteUserUpdateQueryBuilder(user, QueryElement.All).Build();
 
-            Console.WriteLine($"[LOAD] Sending user data to a db: {user.DiscordData.Username}");
+            Console.WriteLine($"[LOAD] Sending user data to a db: {user.DiscordData.Username} with query: {query}");
             var updateCommand = new SqliteCommand(query, connector.Connection);
             await updateCommand.ExecuteScalarAsync();
 

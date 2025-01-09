@@ -37,7 +37,7 @@ namespace LLM.Rori.Discord.Builders
                 if (i < ElementsUsed.Length - 1) queryBuilder.Append(",");
             }
 
-            QueryString = $"UPDATE `users` SET {queryBuilder.ToString()} WHERE `userid`='{UserIdUsed}'";
+            QueryString = $"UPDATE `users` SET {queryBuilder.ToString()} WHERE `id`='{UserIdUsed}'";
         }
 
         public string Build() => QueryString;

@@ -51,7 +51,7 @@ namespace LLM.Rori.Discord.Extension
                 case QueryElement.DiscordData: return $"`discord_data`='{JsonConvert.SerializeObject(user.DiscordData)}'";
                 case QueryElement.MintyBarData: return $"`minty_bar_data`='{JsonConvert.SerializeObject(user.MintyBarData)}'";
                 default:
-                    return $"`userid='{user.Id}',`discord_data`='{JsonConvert.SerializeObject(user.DiscordData)}',`minty_bar_data`='{JsonConvert.SerializeObject(user.MintyBarData)}'";
+                    return $"`id='{user.Id}',`discord_data`='{JsonConvert.SerializeObject(user.DiscordData)}',`minty_bar_data`='{JsonConvert.SerializeObject(user.MintyBarData)}'";
             }
         }
 

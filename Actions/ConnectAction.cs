@@ -2,6 +2,7 @@
 using LLM.Rori.Discord.Data.Bot;
 using LLM.Rori.Discord.Extension;
 using LLM.Rori.Discord.Base.Interfaces;
+using LLM.Rori.Discord.Builders;
 
 namespace LLM.Rori.Discord.Actions
 {
@@ -28,8 +29,10 @@ namespace LLM.Rori.Discord.Actions
 
         public async Task ConnectMintyUID(User user, string uid)
         {
+            //await from REST call to the backend
+
             user.MintyBarData = new Data.Starchild.MintyBarData() { Id = uid };
-            await dataHandler.SendData(user, QueryElement.All.GetCorrespondingQuery(user));
+            await dataHandler.SendData(user, new SqliteUserUpdateQueryBuilder(user, new[] { QueryElement.MintyBarData }).Build());
         }
     }
 }

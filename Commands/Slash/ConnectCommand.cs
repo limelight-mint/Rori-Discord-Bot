@@ -14,7 +14,7 @@ namespace LLM.Rori.Discord.Commands.Slash
         {
             if (!ConnectAction.CheckIfUidValid(uid))
             {
-                await context.CreateResponseAsync($"> ✖️ UID Error. Example `/connect sfh20dsFSzdFSz29f9x34`. Pass UID as parameter in Discord pop-up command menu please. ✖️", true);
+                await context.CreateResponseAsync($"> ✖️ UID Error. Example `/connect sfh20dsFSzdFSz29f9x34`. Pass UID from minty.bar as parameter in Discord pop-up command menu please. ✖️", true);
                 return;
             }
 
@@ -23,7 +23,7 @@ namespace LLM.Rori.Discord.Commands.Slash
 
             await action.ConnectMintyUID(user, uid);
 
-            var response = context.CreateResponseAsync($"> ✨{user.DiscordData.Username} | UID: {user.DiscordData.Id} ✅", true);
+            var response = context.CreateResponseAsync($"> ✨{user.DiscordData.Username} | UID: {user.DiscordData.Id} | Minty Bar ID: {user.MintyBarData.Id} ✅", true);
         }
     }
 }
